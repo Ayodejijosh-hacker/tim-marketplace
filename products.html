@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Us | Tim Marketplace</title>
+  <link rel="icon" href="tim.jpeg" type="image/x-icon">
+  
+  <style>
+    /* RESET */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background: #fff; }
+    h1, h2, h3 { font-weight: 700; }
+    a, button { cursor: pointer; text-decoration: none; }
+
+    /* GLOBALS */
+    section { padding: 60px 20px; max-width: 1200px; margin: auto; }
+    section h2 { text-align: center; font-size: 2rem; margin-bottom: 40px; }
+    .btn {
+      display: inline-block; padding: 12px 24px; border-radius: 8px;
+      font-weight: bold; transition: 0.3s; margin: 8px;
+    }
+    .btn-white { background: #fff; color: #4f46e5; }
+    .btn-white:hover { background: #f3f3f3; }
+    .btn-dark { background: #4338ca; color: #fff; }
+    .btn-dark:hover { background: #3730a3; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(to right, #4f46e5, #7c3aed);
+      color: #fff; text-align: center; padding: 80px 20px;
+    }
+    .hero h1 { font-size: 2.2rem; margin-bottom: 20px; }
+    .hero p { font-size: 1.1rem; margin: 0 auto 30px; max-width: 700px; }
+
+    /* FEATURES */
+    .features {
+      display: grid; gap: 20px;
+      grid-template-columns: 1fr;
+    }
+    .feature-card {
+      background: #fff; border-radius: 12px; padding: 20px; text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: 0.3s;
+    }
+    .feature-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+    .feature-card h3 { margin-bottom: 10px; color: #4f46e5; }
+
+    /* CATEGORIES */
+    .categories {
+      display: grid; gap: 20px;
+      grid-template-columns: 1fr 1fr;
+    }
+    .category {
+      background: #fff; border-radius: 12px; padding: 20px; text-align: center;
+      font-weight: bold; color: #444444; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+    .category:hover { color: #4f46e5; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+
+    /* TRUST */
+    .trust {
+      display: flex; flex-direction: column; gap: 30px; align-items: center;
+    }
+    .trust img { max-width: 100%; border-radius: 12px; }
+    .trust .text { max-width: 500px; }
+
+    /* STEPS */
+    .steps {
+      display: grid; gap: 20px;
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .step {
+      background: #fff; border-radius: 12px; padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .step-number {
+      width: 50px; height: 50px; background: #4f46e5; color: #fff;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-weight: bold; margin: 0 auto 15px auto;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials { display: grid; gap: 20px; grid-template-columns: 1fr; }
+    .testimonial {
+      background: #fff; border-radius: 12px; padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1); font-style: italic;
+    }
+    .testimonial span { display: block; margin-top: 10px; font-weight: bold; color: #4f46e5; }
+
+    /* FAQ */
+    .faq { display: grid; gap: 15px; }
+    .faq-item {
+      background: #fff; border-radius: 8px; padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1); cursor: pointer;
+    }
+    .faq-item h3 { margin-bottom: 8px; font-size: 1rem; color: #4f46e5; }
+    .faq-item p {  color: #555; font-size: 0.95rem; }
+
+    /* CLOSING */
+    .closing { text-align: center; background: #f9fafb; border-top: 1px solid #eee; }
+    .closing p { margin: 15px auto 30px auto; max-width: 700px; color: #555; }
+
+    /* RESPONSIVE */
+    @media (min-width: 600px) {
+      .features { grid-template-columns: 1fr 1fr; }
+      .categories { grid-template-columns: 1fr 1fr 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .testimonials { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 900px) {
+      .features { grid-template-columns: repeat(4, 1fr); }
+      .categories { grid-template-columns: repeat(4, 1fr); }
+      .steps { grid-template-columns: repeat(4, 1fr); }
+      .testimonials { grid-template-columns: repeat(3, 1fr); }
+      .trust { flex-direction: row; justify-content: space-between; }
+      #preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.ring {
+  position: absolute;
+  width: 40px;   /* small ring */
+  height: 40px;
+  border: 2px solid #000;  /* thin border */
+  border-radius: 50%;
+  opacity: 0;
+  animation: ringExpand 2s infinite ease-out;
+}
+
+.ring:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.ring:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+@keyframes ringExpand {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Hide page content until preloader is gone */
+body.loaded #preloader {
+  display: none;
+}
+/* FOOTER */
+.f-container {
+  background: midnightblue;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+.f-container p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+}
+
+  </style>
+</head>
+<body>
+    <div id="preloader">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+  </div>
+
+    <link rel="stylesheet" href="https://rockysocials.com/assets/templates/basic/css/color.php?color=070707">
+    
+    <!-- Google tag (gtag.js) -->
+    
+</head>
+
+
+<body>
+
+  
+
+
+  <!-- 🌐 HERO -->
+  <header class="hero">
+    <h1>Explore Tim Marketplace</h1>
+    <p>Your one-stop shop for reliable <strong>social media logins</strong> and <strong>foreign numbers</strong>. Secure, fast, and trusted worldwide.</p>
+    <a href="#categories" class="btn btn-white">Start Exploring</a>
+    <a href="https://whatsapp.com/channel/0029Vb5woIIJuyAD08JvK23a" class="btn btn-dark" target="_blank" rel="noopener noreferrer">Join Our Community</a>
+  </header>
+
+  <!-- 🛍️ WHY CHOOSE US -->
+  <section>
+    <h2>Why Choose Tim Marketplace?</h2>
+    <div class="features">
+      <div class="feature-card">
+        <h3>Verified Logins</h3>
+        <p>Genuine accounts for Facebook, Instagram, Twitter, TikTok, and more.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Worldwide Numbers</h3>
+        <p>Access US, UK, European, and Asian numbers for verification.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Instant Delivery</h3>
+        <p>Receive login details or numbers within minutes of purchase.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Privacy Guaranteed</h3>
+        <p>Your identity and purchases remain confidential at all times.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 📂 CATEGORIES -->
+  <section id="categories" style="background:#f9fafb;">
+    <h2>Explore by Category</h2>
+    <div class="categories">
+      <div class="category"><a href="facebook.html" target="_blank" rel="noopener noreferrer">Facebook Logins</a></div>
+      <div class="category"><a href="instagram.html" target="_blank" rel="noopener noreferrer">Instagram Accounts</a></div>
+      <div class="category"><a href="twitter.html" target="_blank" rel="noopener noreferrer">Twitter / X Logins</a></div>
+      <div class="category"><a href="tiktok.html" target="_blank" rel="noopener noreferrer">TikTok Accounts</a></div>
+      <div class="category"><a href="whatsapp.html" target="_blank" rel="noopener noreferrer">WhatsApp Numbers</a></div>
+      <div class="category"><a href="us-uk.html" target="_blank" rel="noopener noreferrer">US & UK Numbers</a></div>
+      <div class="category"><a href="usa.html" target="_blank" rel="noopener noreferrer">USA Numbers</a></div>
+      <div class="category"><a href="https://whatsapp.com/channel/0029Vb5woIIJuyAD08JvK23a" target="_blank" rel="noopener noreferrer">Other Socials</a></div>
+      </div>
+    </section>
+
+  <!-- 🤝 TRUST -->
+  <section>
+    <div class="trust">
+      <div class="text">
+        <h2>Built on Trust & Simplicity</h2>
+        <p>Our marketplace makes buying accounts and numbers simple, fast, and secure. With verified sellers, encrypted delivery, and a growing global community, you can trade with confidence.</p>
+        <a href="#join" class="btn btn-dark">Get Started</a>
+      </div>
+      <img src="trust.jpeg" alt="Trust Illustration">
+    </div>
+  </section>
+
+  <!-- 📲 HOW IT WORKS -->
+  <section style="background:#f9fafb;">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Browse Listing</h3>
+        <p>Explore verified logins and numbers from Tim Marketplace.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Instant Purchase</h3>
+        <p>Buy safely and securely with our trusted system.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Recieve Instantly</h3>
+        <p>Get your order delivered instantly and securely.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Testify</h3>
+        <p>Let others know about Tim Marketplace.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⭐ TESTIMONIALS -->
+  <section>
+    <h2>What Our Customers Say</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        “Fast delivery and reliable accounts. I bought 3 Instagram logins and all worked perfectly.”
+        <span>- Sarah J.</span>
+      </div>
+      <div class="testimonial">
+        “The foreign numbers helped me set up my business profiles abroad. Great service.”
+        <span>- James O.</span>
+      </div>
+      <div class="testimonial">
+        “I was worried at first, but Tim Marketplace is 100% legit. Smooth experience.”
+        <span>- Ahmed R.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ❓ FAQ -->
+  <section style="background:#f9fafb;">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <h3>Are the logins verified?</h3>
+        <p>Yes, every account is tested and verified before listing.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How fast is delivery?</h3>
+        <p>Most purchases are delivered instantly. Some may take up to 10 minutes.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Are foreign numbers reusable?</h3>
+        <p>Yes, most numbers can be reused unless marked as one-time use.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is my information safe?</h3>
+        <p>Absolutely. We never share your purchase history or details.</p>
+      </div>
+    </div>
+  </section>
+ 
+
+  <!-- 🚀 CLOSING -->
+  <section id="join" class="closing">
+    <h2>Join Tim Marketplace Today</h2>
+    <p>Start exploring our wide range of social media logins and foreign numbers. Secure, reliable, and always at your fingertips.</p>
+    <a href="home.html" class="btn btn-dark">Get Started Now</a>
+  </section>
+   <footer>
+  <div class="f-container">
+    <p>&copy; 2023 Tim Marketplace. All rights reserved.</p>
+  </div>
+</footer>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-82V1C6RYB4"></script>
+  <script>
+    // FAQ Toggle
+    document.querySelectorAll('.faq-item h3').forEach(q => {
+      q.addEventListener('click', () => {
+        let p = q.nextElementSibling;
+        p.classList.toggle('show');
+      });
+    });
+
+  // Wait 2 seconds after page loads then hide preloader
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.body.classList.add("loaded");
+    }, 2000);
+  });
+
+   window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag("js", new Date());
+                
+                  gtag("config", "G-GHBLY8YTBM");
+  </script>
+</body>
+</html>
