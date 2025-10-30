@@ -8,6 +8,71 @@
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/fontawesome.css" integrity="sha512-WNSrioBqIMLQ2jMyIZ1XYH5IhJQ9re91mvh5G45Ge+R007MDJajxEbPjWBTNIfOypcqsXxfiRTtuNvoeAtRb2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.css">
+      <style>
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropbtn {
+      background-color: #222;
+      color: white;
+      width: 100px;
+      height: 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      outline: none;
+    }
+
+    .dropbtn i {
+      transition: transform 0.3s ease;
+    }
+
+    .dropbtn.active i {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-content {
+      display: block;
+      position: absolute;
+      background-color: #222;
+      min-width: 150px;
+      border-radius: 6px;
+      overflow: hidden;
+      top: 110%;
+      left: 0;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-content.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 10px 14px;
+      text-decoration: none;
+      display: block;
+      transition: background 0.3s ease, padding-left 0.2s ease;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #666;
+      padding-left: 18px;
+    }
+      </style>
 </head>
 <body>
     <header>
@@ -20,20 +85,21 @@
                        <i class="las la-search"></i>
                     </button>
                 </form>
-            </div>
-            <div class="dropdown">
-    <button onclick="toggleDropdown()" class="dropbtn">
-      Category <i class="las la-angle-down"></i>
-    </button>
-    <div id="myDropdown" class="dropdown-content">
-      <a href="instagram.html" target="_blank" rel="noopener noreferrer">Instagram</a>
-      <a href="facebook.html"_blank" rel="noopener noreferrer">Facebook</a>
-      <a href="tiktok.html" target="_blank" rel="noopener noreferrer">TikTok</a>
-      <a href="twitter.html" target="_blank" rel="noopener noreferrer">Twitter|X</a>
-      <a href="facebook.html" target="_blank" rel="noopener noreferrer">Dating Facebook</a>
-      <a href="https://whatsapp.com/channel/0029Vb5wollJuyAD08JvK23a" target="_blank" rel="noopener noreferrer">Other Socials</a>
+            <!-- ✅ Fixed Dropdown -->
+    <div class="dropdown">
+      <button onclick="toggleDropdown()" class="dropbtn">
+        Category <i class="las la-angle-down"></i>
+      </button>
+      <div id="myDropdown" class="dropdown-content">
+        <a href="instagram.html" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="facebook.html" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="tiktok.html" target="_blank" rel="noopener noreferrer">TikTok</a>
+        <a href="twitter.html" target="_blank" rel="noopener noreferrer">Twitter | X</a>
+        <a href="facebook.html" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://whatsapp.com/channel/0029Vb5wollJuyAD08JvK23a" target="_blank" rel="noopener noreferrer">Other Socials</a>
+      </div>
     </div>
-  </div>
+            </div>
         </div>
         <br>
         <div class="container2">
@@ -155,4 +221,5 @@ Message: ${message}`;
 
     </script>
 </body>
+
 </html>
